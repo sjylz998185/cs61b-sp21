@@ -7,6 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+
+// board is background , and it have property value[][] to store Tile type
+// viewPerspective store motion
+
 /**
  * @author hug
  */
@@ -16,16 +20,20 @@ public class Board implements Iterable<Tile> {
     /** Side that the board currently views as north. */
     private Side viewPerspective;
 
+//  1.instance : create Tile array (x * x) and set initial motion
     public Board(int size) {
         values = new Tile[size][size];
         viewPerspective = Side.NORTH;
     }
 
+
+//    we can use s.setViewingPerspective(Side.North) to set motion of instance
     /** Shifts the view of the board such that the board behaves as if side S is north. */
     public void setViewingPerspective(Side s) {
         viewPerspective = s;
     }
 
+//   2. instance
     /** Create a board where RAWVALUES hold the values of the tiles on the board 
      * (0 is null) with a current score of SCORE and the viewing perspective set to north. */
     public Board(int[][] rawValues, int score) {
@@ -46,6 +54,7 @@ public class Board implements Iterable<Tile> {
         }
     }
 
+//    b.size return length of instance
     /** Returns the size of the board. */
     public int size() {
         return values.length;
@@ -62,6 +71,7 @@ public class Board implements Iterable<Tile> {
         return values[side.col(col, row, size())][side.row(col, row, size())];
     }
 
+//  instance.tile(c,r) return value of tile at (c,r)
     /** Return the current Tile at (COL, ROW), where 0 <= ROW < size(),
      *  0 <= COL < size(). Returns null if there is no tile there. */
     public Tile tile(int col, int row) {

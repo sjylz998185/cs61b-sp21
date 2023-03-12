@@ -1,5 +1,8 @@
 package game2048;
 
+
+// we only use assignment statement: Side s = Side.NORTH ,assign Side.NORTH into Side type.
+
 /** Symbolic names for the four sides of a board.
  *  @author P. N. Hilfinger */
 public enum Side {

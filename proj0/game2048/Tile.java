@@ -1,10 +1,13 @@
 package game2048;
 
+
+
 /** Represents the image of a numbered tile on a 2048 board.
  *  @author P. N. Hilfinger.
  */
 public class Tile {
 
+//    instance of Tile represents numbered on the board , row and col , and value
     /** A new tile with VALUE as its value at (ROW, COL).  This
      *  constructor is private, so all tiles are created by the
      *  factory methods create, move, and merge. */
@@ -15,6 +18,8 @@ public class Tile {
         this.next = null;
     }
 
+
+//    we can use instance. row col value and next return they value in this instance
     /** Return my current row. */
     public int row() {
         return row;
@@ -25,6 +30,7 @@ public class Tile {
         return col;
     }
 
+//    we only use value() to get value of instance
     /** Return the value supplied to my constructor. */
     public int value() {
         return value;
@@ -36,11 +42,13 @@ public class Tile {
         return next == null ? this : next;
     }
 
+//    Tile.create(value,col,row) return new Tile instance
     /** Return a new tile at (ROW, COL) with value VALUE. */
     public static Tile create(int value, int col, int row) {
         return new Tile(value, col, row);
     }
 
+//    instance.move(col,row) return new Tile type
     /** Return the result of moving me to (COL, ROW). */
     public Tile move(int col, int row) {
         Tile result = new Tile(value, col, row);
@@ -48,6 +56,7 @@ public class Tile {
         return result;
     }
 
+//    instance.merge return double value Tile instance
     /** Return the result of merging OTHERTILE with me after moving to
      *  (COL, ROW). */
     public Tile merge(int col, int row, Tile otherTile) {

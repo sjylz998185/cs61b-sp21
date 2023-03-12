@@ -4,6 +4,7 @@ import java.util.Formatter;
 import java.util.Observable;
 
 
+
 /** The state of a game of 2048.
  *  @author TODO: YOUR NAME HERE
  */
@@ -16,6 +17,8 @@ public class Model extends Observable {
     private int maxScore;
     /** True iff game is ended. */
     private boolean gameOver;
+
+
 
     /* Coordinate System: column C, row R of the board (where row 0,
      * column 0 is the lower-left corner of the board) will correspond
@@ -135,9 +138,19 @@ public class Model extends Observable {
 
     /** Returns true if at least one space on the Board is empty.
      *  Empty spaces are stored as null.
+     *  should use the tile(int col, int row) and size()
      * */
     public static boolean emptySpaceExists(Board b) {
-        // TODO: Fill in this function.
+        // TODO: Fill in this function. check Board have empty tile.
+        int size = b.size();
+
+        for(int i = 0 ; i < size ; i++){
+            for(int j = 0 ; j < size ; j++){
+                if(b.tile(i,j) == null)
+                    return true;
+            }
+        }
+
         return false;
     }
 
@@ -145,9 +158,17 @@ public class Model extends Observable {
      * Returns true if any tile is equal to the maximum valid value.
      * Maximum valid value is given by MAX_PIECE. Note that
      * given a Tile object t, we get its value with t.value().
+     * we have private variable MAX_PIECE == 2048
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+
+
+    for(Tile t : b){
+        if(t != null && t.value() == MAX_PIECE) return true;
+    }
+
+
         return false;
     }
 
@@ -159,10 +180,26 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
-        return false;
+        return emptySpaceExists(b) || mergeMoveExists(b);
     }
 
-
+    private static boolean mergeMoveExists(Board b) {
+        int[][] neighbors = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // 上下左右
+        int len = b.size();
+        for (Tile t : b) {
+            int c = t.col();    // x
+            int r = t.row();    // y
+            for (int i = 0; i < 4; i++) {
+                int nc = c + neighbors[i][0];
+                int nr = r + neighbors[i][1];
+                if ((0 <= nc && nc < len) && (0 <= nr && nr < len)
+                        && (b.tile(nr, nc).value() == t.value())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     @Override
      /** Returns the model as a string, used for debugging. */
     public String toString() {
