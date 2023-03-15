@@ -10,11 +10,18 @@ public class IntListExercises {
      */
     public static void addConstant(IntList lst, int c) {
         IntList head = lst;
-        while (head.rest != null) {
+        while (head != null) {
             head.first += c;
             head = head.rest;
         }
+
     }
+
+    /* how to set map function (test) :
+    * the initial variable
+    * the each round add initial , and link the condition about each round(test null)
+    * */
+
 
     /**
      * Part B: Buggy method that sets node.first to zero if
@@ -54,7 +61,12 @@ public class IntListExercises {
         while (x > 10) {
             x = x / 10;
         }
-        int firstDigit = x % 10;
+        int firstDigit;
+        if(x == 10){
+            firstDigit = x ;
+        } else {
+            firstDigit = x % 10;
+        }
         return firstDigit == lastDigit;
     }
 
