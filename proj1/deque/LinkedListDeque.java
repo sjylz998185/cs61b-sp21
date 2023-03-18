@@ -1,6 +1,6 @@
 package deque;
 
-public class LinkedListDeque<Item> {
+public class LinkedListDeque<Item> implements MaxArrayDeque<Item> {
 //    the implementation of list
     /*list node*/
     private static class IntNode<Item>{
@@ -37,6 +37,7 @@ public class LinkedListDeque<Item> {
 
 
 //    start of insert operation
+    @Override
     public void addFirst(Item x){
         /* set new IntNode*/
         IntNode elem = new IntNode(sentinel, x, sentinel.next);
@@ -54,6 +55,7 @@ public class LinkedListDeque<Item> {
         size++;
     }
 
+    @Override
     public void addLast(Item x){
         IntNode elem = new IntNode(sentinel.prev,x,sentinel);
         sentinel.prev.next = elem;
@@ -65,6 +67,7 @@ public class LinkedListDeque<Item> {
 
 
 //    test if it is empty
+    @Override
     public boolean isEmpty(){
         if(this.size == 0) return true;
         else return false;
@@ -73,6 +76,7 @@ public class LinkedListDeque<Item> {
 
 
 //    get size
+    @Override
     public int size(){
         return size;
     }
@@ -80,6 +84,7 @@ public class LinkedListDeque<Item> {
 
 
 //    start of get operation
+    @Override
     public Item get(int index){
         /*when we using this frame , we must assign Item type into this frame*/
         IntNode<Item> p = this.sentinel;
@@ -106,6 +111,7 @@ public class LinkedListDeque<Item> {
 
 
 //    print element of this list
+    @Override
     public void printDeque(){
         for(int i = 0; i < this.size; i++){
             Item val = this.get(i);
@@ -114,6 +120,7 @@ public class LinkedListDeque<Item> {
     }
 
 //    start of remove operation
+    @Override
     public Item removeFirst(){
         if(size == 0){
             return null;
@@ -127,6 +134,7 @@ public class LinkedListDeque<Item> {
         }
     }
 
+    @Override
     public Item removeLast(){
         if(size == 0){
             return null;

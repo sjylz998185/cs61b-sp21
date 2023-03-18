@@ -1,6 +1,6 @@
 package deque;
 
-public class ArrayDeque<Item> {
+public class ArrayDeque<Item> implements MaxArrayDeque<Item> {
     private Item[] items = (Item [])new Object[8];
 
     private int size;
@@ -17,6 +17,7 @@ public class ArrayDeque<Item> {
         items = a;
     }
 
+    @Override
     public void addLast(Item x){
         if(size == items.length){
             resize(size * 2);
@@ -25,6 +26,7 @@ public class ArrayDeque<Item> {
         size++;
     }
 
+    @Override
     public void addFirst(Item x){
         if(size == items.length){
             resize(size * 2);
@@ -35,15 +37,18 @@ public class ArrayDeque<Item> {
         items[0] = x;
     }
 
+    @Override
     public boolean isEmpty(){
         if(items[0] == null) return true;
         else return false;
     }
 
+    @Override
     public int size(){
         return size;
     }
 
+    @Override
     public void printDeque(){
         if(isEmpty()){
             return ;
@@ -55,7 +60,8 @@ public class ArrayDeque<Item> {
     }
 
 
-    public Item removeFirst(Item x){
+    @Override
+    public Item removeFirst(){
         if(size < items.length / 4 && size > 4){
             resize(items.length / 4);
         }
@@ -67,7 +73,8 @@ public class ArrayDeque<Item> {
         return first;
     }
 
-    public Item removeLast(Item x){
+    @Override
+    public Item removeLast(){
         if(size < items.length / 4 && size > 4) {
             resize(items.length / 4);
         }
@@ -76,6 +83,7 @@ public class ArrayDeque<Item> {
         return  last;
     }
 
+    @Override
     public Item get(int x){
         return items[x];
     }
