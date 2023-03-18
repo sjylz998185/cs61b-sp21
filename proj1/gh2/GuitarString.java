@@ -4,6 +4,7 @@ package gh2;
 // import deque.Deque;
 // TODO: maybe more imports
 
+
 //Note: This file will not compile until you complete the Deque implementations
 public class GuitarString {
     /** Constants. Do not change. In case you're curious, the keyword final
