@@ -16,7 +16,7 @@ public class LinkedListDeque<Item> {
 
 
     /*this is sentinel */
-    private IntNode sentinel = new IntNode(null,null,null);
+    private IntNode sentinel;
 
     private int size;
 
@@ -29,7 +29,9 @@ public class LinkedListDeque<Item> {
 
     public LinkedListDeque(){
         size = 0;
-        sentinel = new IntNode(sentinel,null,sentinel);
+        sentinel = new IntNode(null,null,null);
+        sentinel.next = sentinel;
+        sentinel.prev = sentinel;
     }
 
 
@@ -64,7 +66,7 @@ public class LinkedListDeque<Item> {
 
 //    test if it is empty
     public boolean isEmpty(){
-        if(this.sentinel.next == null) return true;
+        if(this.size == 0) return true;
         else return false;
     }
 
@@ -113,14 +115,22 @@ public class LinkedListDeque<Item> {
 
 //    start of remove operation
     public Item removeFirst(){
-        IntNode ele = this.sentinel.next;
-        this.sentinel.next.next.prev = this.sentinel;
-        this.sentinel.next =this.sentinel.next.next;
-        size--;
-        return (Item)ele.item;
+        if(size == 0){
+            return null;
+        } else {
+            IntNode ele = this.sentinel.next;
+            this.sentinel.next.next.prev = this.sentinel;
+            this.sentinel.next = this.sentinel.next.next;
+            size--;
+
+            return (Item) ele.item;
+        }
     }
 
     public Item removeLast(){
+        if(size == 0){
+            return null;
+        }
         IntNode ele = this.sentinel.prev;
         this.sentinel.prev.prev.next = this.sentinel;
         this.sentinel.prev = this.sentinel.prev.prev;
