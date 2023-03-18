@@ -27,6 +27,11 @@ public class LinkedListDeque<Item> {
         size = 1;
     }
 
+    public LinkedListDeque(){
+        size = 0;
+        sentinel = new IntNode(sentinel,null,sentinel);
+    }
+
 
 
 //    start of insert operation
@@ -56,8 +61,6 @@ public class LinkedListDeque<Item> {
 //    end of insert operation
 
 
-//    start of insert operation
-
 
 //    test if it is empty
     public boolean isEmpty(){
@@ -78,18 +81,22 @@ public class LinkedListDeque<Item> {
     public Item get(int index){
         /*when we using this frame , we must assign Item type into this frame*/
         IntNode<Item> p = this.sentinel;
+
         if(index == 0){
-            return  (Item)this.sentinel.prev;
+            return  (Item)this.sentinel.next.item;
         }
+
         if(index > this.size){
             return null;
         }
+
         for(int i = 1; i < index ; i++){
             if(p.next == null){
                 return null;
             }
             p = p.next;
         }
+
         return p.item;
     }
 
