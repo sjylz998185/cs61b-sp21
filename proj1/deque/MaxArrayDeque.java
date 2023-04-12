@@ -1,31 +1,49 @@
 package deque;
 
-public interface MaxArrayDeque<Item> {
-    public void addFirst(Item item);
+import java.util.Comparator;
 
-    public void addLast(Item item);
+public class MaxArrayDeque<T> extends ArrayDeque<T> {
+    private Comparator cmp;
 
-    default public boolean isEmpty(){
-        if(size() == 0){
-            return true;
-        }
-        else return false;
+    public MaxArrayDeque(Comparator<T> c) {
+        size = 0;
+        items = (T[]) new Object[8];
+        nextFirst = 0;
+        nextLast = 1;
+        this.cmp = c;
     }
 
-    public int size();
+    public T max() {
+        if (size == 0) {
+            return null;
+        }
 
-    public void printDeque();
+        int index = addOne(nextFirst);
+        T max = items[index];
+        for (int i = 0; i < size; i++) {
+            if (cmp.compare(items[index], max) > 0) {
+                max = items[index];
+            }
+            index = addOne(index);
+        }
 
-    public Item removeFirst();
+        return max;
+    }
 
-    public Item removeLast();
+    public T max(Comparator<T> c) {
+        if (size == 0) {
+            return null;
+        }
 
-    public Item get(int index);
+        int index = addOne(nextFirst);
+        T max = items[index];
+        for (int i = 0; i < size; i++) {
+            if (c.compare(items[index], max) > 0) {
+                max = items[index];
+            }
+            index = addOne(index);
+        }
 
-
-
-
-
-
-
+        return max;
+    }
 }
